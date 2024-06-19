@@ -9,7 +9,6 @@ from dff.script import Context
 from dff.pipeline import Pipeline
 from dff.messengers.telegram import TelegramMessage
 
-
 def received_text(ctx: Context, _: Pipeline):
     """Return true if the last update from user contains text."""
     last_request = ctx.last_request
