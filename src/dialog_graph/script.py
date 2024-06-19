@@ -45,15 +45,11 @@ script = {
         },
         "chitchat_node": {
             RESPONSE: TelegramMessage(
-                text="I don't know how to chat with people \U0001F62B \
-                Please ask me questions about NLP-related articles",
-                
                 attachments=Attachments(files=[Audio(source="/app/dialog_graph/samples/idk.ogg")])
             ),
         },
         "welcome_node": {
             RESPONSE: TelegramMessage(
-                text="Welcome! Ask me questions about NLP-related articles",
                 attachments=Attachments(files=[Audio(source="/app/dialog_graph/samples/welcome.ogg")])
             ),
         },

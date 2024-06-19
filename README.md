@@ -1,6 +1,6 @@
-# Neuroscholar Bot
+# Talking-Neuroscholar Bot
 
-This repository contains the Neuroscholar bot designed to assist with answering questions about NLP papers.
+This repository contains the Neuroscholar bot designed to assist with answering questions about NLP papers using **voice**.
 
 ## How to Run
 

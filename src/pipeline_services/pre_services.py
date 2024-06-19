@@ -15,23 +15,17 @@ from .voice_processor import transcribe_audio
 
 
 import logging
-import io
 
-# Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
 def question_processor(ctx: Context):
     last_request = ctx.last_request
-    logger.info(f"GET THE QUERY: {last_request}")
-    
     messenger_interface = MessengerInterfaceSingleton.get_instance()
     
     if last_request is None:
         return
-    
-    logger.info(f"CHECK VOICE: {last_request.update.voice}")
     
     if last_request.update.voice is not None:
         file_info = messenger_interface.messenger.get_file(last_request.update.voice.file_id)
@@ -42,11 +36,6 @@ def question_processor(ctx: Context):
             new_file.write(downloaded_file)
             
         last_request.text = transcribe_audio(temp_file_path)
-            
-        # # Use BytesIO to handle file operations in memory
-        # with io.BytesIO(downloaded_file) as audio_file:
-        #     # You might need to adjust this if your ASR pipeline expects a file path.
-        #     last_request.text = transcribe_audio(audio_file)
         
     logger.info(f"last_request.text: {last_request.text}")
     

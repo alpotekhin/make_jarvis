@@ -33,13 +33,6 @@ class ASRPipelineSingleton:
         return cls._instance
 
 def transcribe_audio(file_obj):
-    # Load the audio file from the BytesIO object
-    # file_obj.seek(0)  # Ensure you're at the start of the BytesIO object
-    # y, sr = librosa.load(file_obj, sr=None)
-
-    # # Convert the audio to a numpy array
-    # audio_array = np.array(y)
-
     # Get the ASR pipeline
     asr_pipeline = ASRPipelineSingleton.get_instance()
     
