@@ -1,0 +1,10 @@
+# Ignore everything by default
+**
+
+# Except for these files and directories
+!requirements.txt
+!src/
+
+# Ignore specific files or directories in the src/ directory
+src/data/
+src/logs/
