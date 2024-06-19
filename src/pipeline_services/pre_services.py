@@ -4,6 +4,8 @@ Pre Services
 This module defines services that process user requests before script transition.
 """
 
+import os
+os.environ["COQUI_TOS_AGREED"] = "1"
 from dff.script import Context
 
 from qa.rag import retrieve
@@ -35,10 +37,16 @@ def question_processor(ctx: Context):
         file_info = messenger_interface.messenger.get_file(last_request.update.voice.file_id)
         downloaded_file = messenger_interface.messenger.download_file(file_info.file_path)
         
-        # Use BytesIO to handle file operations in memory
-        with io.BytesIO(downloaded_file) as audio_file:
-            # You might need to adjust this if your ASR pipeline expects a file path.
-            last_request.text = transcribe_audio(audio_file)
+        temp_file_path = os.path.join('/tmp', 'temp.wav')
+        with open(temp_file_path, 'wb') as new_file:
+            new_file.write(downloaded_file)
+            
+        last_request.text = transcribe_audio(temp_file_path)
+            
+        # # Use BytesIO to handle file operations in memory
+        # with io.BytesIO(downloaded_file) as audio_file:
+        #     # You might need to adjust this if your ASR pipeline expects a file path.
+        #     last_request.text = transcribe_audio(audio_file)
         
     logger.info(f"last_request.text: {last_request.text}")
     

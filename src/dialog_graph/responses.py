@@ -8,9 +8,10 @@ from typing import cast
 
 from dff.script import Context
 from dff.pipeline import Pipeline
-from dff.script.core.message import Button
-from dff.messengers.telegram import TelegramMessage, TelegramUI, ParseMode
+from dff.messengers.telegram import TelegramMessage
+from dff.script.core.message import Attachments, Audio
 from qa.rag import format_document, generate
+from pipeline_services.voice_processor import synthesize_speech
 
 
 def answer_question(ctx: Context, _: Pipeline):
@@ -30,5 +31,7 @@ def answer_question(ctx: Context, _: Pipeline):
         [format_document(doc, i + 1) for i, doc in enumerate(retrieved_docs)]
     )
     gen_answer = generate(question=last_request.text, context=context)
+    synthesize_speech(gen_answer, "/tmp/temp_ans.ogg")
 
-    return TelegramMessage(text=gen_answer, parse_mode=ParseMode.HTML)
+    return TelegramMessage(attachments=Attachments(files=[Audio(source="/tmp/temp_ans.ogg")]))
+

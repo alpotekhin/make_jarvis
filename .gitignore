@@ -19,3 +19,4 @@ htmlcov
 /qdrant_storage
 dbs/
 dialog_flow_framework/
+build.log

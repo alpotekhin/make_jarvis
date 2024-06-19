@@ -14,9 +14,8 @@ from database.build_qdrant import get_qdrant
 
 
 
-template = """You are a helpful assistant named "Neuroscholar". You answer questions about papers based on the context.
+template = """You are a helpful assistant named "Neuroscholar". You answer questions about papers based on the context in one sentence.
 If you receive a question that is not related to the papers or context, you should answer "Please ask another question".
-Make sure to attach the title of the article that you relied on in the answer and attach a link to it
 #################
 Context: {context}
 #################

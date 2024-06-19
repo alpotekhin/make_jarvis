@@ -4,9 +4,11 @@ Script
 This module defines a script that the bot follows during conversation.
 """
 
+import os
 from dff.script import RESPONSE, TRANSITIONS, LOCAL
 import dff.script.conditions as cnd
 from dff.messengers.telegram import TelegramMessage
+from dff.script.core.message import Attachments, Audio
 
 from .responses import answer_question
 from .conditions import received_statement, received_question
@@ -44,12 +46,15 @@ script = {
         "chitchat_node": {
             RESPONSE: TelegramMessage(
                 text="I don't know how to chat with people \U0001F62B \
-                Please ask me questions about NLP-related articles (currently, only DeepPavlov seminar papers are supported)."
+                Please ask me questions about NLP-related articles",
+                
+                attachments=Attachments(files=[Audio(source="/app/dialog_graph/samples/idk.ogg")])
             ),
         },
         "welcome_node": {
             RESPONSE: TelegramMessage(
-                text="Welcome! Ask me questions about NLP-related articles (currently, only DeepPavlov seminar papers are supported)."
+                text="Welcome! Ask me questions about NLP-related articles",
+                attachments=Attachments(files=[Audio(source="/app/dialog_graph/samples/welcome.ogg")])
             ),
         },
         "answer_question": {
